@@ -1,7 +1,7 @@
 # =============================================================
 # 🏛️ Institutional Apollo / ENIGMA – Quant Terminal v4.3
 # Professional Portfolio Optimization & Global Multi-Asset Edition
-# Enhanced: Robust error handling, parallel data loading, and performance
+# Fixed: Series boolean ambiguity errors and enhanced error handling
 # =============================================================
 
 import os
@@ -613,8 +613,10 @@ class PortfolioOptimizer:
                     mean = col_data.mean()
                     std = col_data.std()
                     if std > 0:
+                        # Use .values to avoid Series boolean ambiguity
                         mask = (returns_clean[col] - mean).abs() < (10 * std)
-                        returns_clean[col] = returns_clean[col].where(mask, mean)
+                        # Apply the mask properly
+                        returns_clean.loc[~mask, col] = mean
             
             # Calculate expected returns and covariance
             try:
