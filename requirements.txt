@@ -13,28 +13,28 @@ plotly>=5.17.0
 plotly-express>=0.4.1
 matplotlib>=3.7.0
 
+# Portfolio Optimization (CRITICAL)
+pyportfolioopt>=1.5.0
+
 # Machine Learning & Statistics
 scikit-learn>=1.3.0
 statsmodels>=0.14.0
+arch>=6.0.0  # GARCH modeling
 
-# Optimization
-cvxpy>=1.3.0
-cvxopt>=1.3.0
-
-# Date/Time
-python-dateutil>=2.8.0
-pytz>=2023.0
+# Network Visualization (optional)
+networkx>=3.0
 
 # Utilities
+python-dateutil>=2.8.0
+pytz>=2023.0
 pyyaml>=6.0
 requests>=2.31.0
 tqdm>=4.65.0
 joblib>=1.3.0
 
-# Optional (for advanced features)
-arch>=6.0.0  # GARCH modeling
-pyportfolioopt>=1.5.0  # Portfolio optimization
-riskfolio-lib>=3.3.0  # Riskfolio for advanced portfolio optimization
-quandl>=3.7.0  # Alternative data source
-ta>=0.10.0  # Technical analysis
-openpyxl>=3.1.0  # Excel export support
+# Advanced Portfolio Optimization (optional)
+riskfolio-lib>=3.3.0
+cvxpy>=1.3.0
+
+# Technical Analysis (optional)
+ta>=0.10.0
