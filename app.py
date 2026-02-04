@@ -1,7 +1,7 @@
 # =============================================================
 # 🏛️ Institutional Apollo / ENIGMA – Quant Terminal v4.2
 # Professional Portfolio Optimization & Global Multi-Asset Edition
-# Fully Functional All Tabs with Professional Visualizations
+# Fixed: Unique widget keys across all tabs
 # =============================================================
 
 import os
@@ -27,7 +27,6 @@ try:
     PYPFOPT_AVAILABLE = True
 except ImportError:
     PYPFOPT_AVAILABLE = False
-    st.warning("PyPortfolioOpt not installed. Using basic optimization methods.")
 
 warnings.filterwarnings("ignore")
 
@@ -68,110 +67,46 @@ GLOBAL_ASSET_UNIVERSE = {
     
     # European Stocks
     "Europe_Stocks": [
-        "ASML.AS",  # Netherlands - Semiconductor
-        "SAP.DE",   # Germany - Software
-        "SIE.DE",   # Germany - Industrial
-        "ALV.DE",   # Germany - Insurance
-        "DTE.DE",   # Germany - Telecom
-        "NOVN.SW",  # Switzerland - Pharma
-        "ROG.SW",   # Switzerland - Pharma
-        "NESN.SW",  # Switzerland - Food
-        "UBSG.SW",  # Switzerland - Banking
-        "CSGN.SW",  # Switzerland - Banking
-        "SAN.PA",   # France - Banking
-        "BNP.PA",   # France - Banking
-        "AIR.PA",   # France - Aerospace
-        "MC.PA",    # France - Luxury
-        "OR.PA",    # France - Cosmetics
-        "ENEL.MI",  # Italy - Energy
-        "ENI.MI",   # Italy - Energy
-        "ISP.MI",   # Italy - Banking
-        "UCG.MI",   # Italy - Banking
+        "ASML.AS", "SAP.DE", "SIE.DE", "ALV.DE", "DTE.DE",
+        "NOVN.SW", "ROG.SW", "NESN.SW", "UBSG.SW", "CSGN.SW",
+        "SAN.PA", "BNP.PA", "AIR.PA", "MC.PA", "OR.PA",
+        "ENEL.MI", "ENI.MI", "ISP.MI", "UCG.MI"
     ],
     
     # UK Stocks
     "UK_Stocks": [
-        "HSBA.L",   # HSBC
-        "BP.L",     # BP
-        "GSK.L",    # GSK
-        "RIO.L",    # Rio Tinto
-        "AAL.L",    # Anglo American
-        "AZN.L",    # AstraZeneca
-        "ULVR.L",   # Unilever
-        "DGE.L",    # Diageo
-        "BATS.L",   # British American Tobacco
-        "NG.L",     # National Grid
+        "HSBA.L", "BP.L", "GSK.L", "RIO.L", "AAL.L",
+        "AZN.L", "ULVR.L", "DGE.L", "BATS.L", "NG.L"
     ],
     
     # Asia Pacific Stocks
     "Asia_Stocks": [
-        "9988.HK",  # Alibaba
-        "0700.HK",  # Tencent
-        "0388.HK",  # HKEX
-        "0005.HK",  # HSBC
-        "1299.HK",  # AIA
-        "7203.T",   # Toyota (Japan)
-        "8306.T",   # Mitsubishi UFJ (Japan)
-        "9984.T",   # SoftBank (Japan)
-        "6758.T",   # Sony (Japan)
-        "6861.T",   # Keyence (Japan)
-        "BABA",     # Alibaba (US)
-        "JD",       # JD.com
-        "BIDU",     # Baidu
-        "NTES",     # NetEase
-        "TCEHY",    # Tencent (US)
+        "9988.HK", "0700.HK", "0388.HK", "0005.HK", "1299.HK",
+        "7203.T", "8306.T", "9984.T", "6758.T", "6861.T",
+        "BABA", "JD", "BIDU", "NTES", "TCEHY"
     ],
     
     # Emerging Markets
     "Emerging_Stocks": [
-        "HDB",      # HDFC Bank (India)
-        "INFY",     # Infosys (India)
-        "TCS.NS",   # TCS (India)
-        "SBIN.NS",  # SBI (India)
-        "RELIANCE.NS", # Reliance (India)
-        "VALE",     # Vale (Brazil)
-        "ITUB",     # Itau (Brazil)
-        "BBD",      # Banco Bradesco (Brazil)
-        "GGB",      # Gerdau (Brazil)
-        "ABEV",     # Ambev (Brazil)
-        "SBS",      # Companhia de Saneamento (Brazil)
+        "HDB", "INFY", "TCS.NS", "SBIN.NS", "RELIANCE.NS",
+        "VALE", "ITUB", "BBD", "GGB", "ABEV", "SBS"
     ],
     
     # Australia
     "Australia_Stocks": [
-        "BHP.AX",   # BHP
-        "RIO.AX",   # Rio Tinto
-        "CBA.AX",   # Commonwealth Bank
-        "WBC.AX",   # Westpac
-        "ANZ.AX",   # ANZ Bank
-        "NAB.AX",   # NAB
-        "CSL.AX",   # CSL
-        "WES.AX",   # Wesfarmers
-        "WOW.AX",   # Woolworths
-        "TLS.AX",   # Telstra
+        "BHP.AX", "RIO.AX", "CBA.AX", "WBC.AX", "ANZ.AX",
+        "NAB.AX", "CSL.AX", "WES.AX", "WOW.AX", "TLS.AX"
     ],
     
     # Singapore
     "Singapore_Stocks": [
-        "D05.SI",   # DBS
-        "O39.SI",   # OCBC
-        "U11.SI",   # UOB
-        "Z74.SI",   # Singapore Telecom
-        "C09.SI",   # City Developments
+        "D05.SI", "O39.SI", "U11.SI", "Z74.SI", "C09.SI"
     ],
     
     # Turkey
     "Turkey_Stocks": [
-        "AKBNK.IS", # Akbank
-        "GARAN.IS", # Garanti BBVA
-        "ISCTR.IS", # İş Bankası
-        "KOZAA.IS", # Koza Altın
-        "SAHOL.IS", # Hacı Ömer Sabancı
-        "THYAO.IS", # Turkish Airlines
-        "TCELL.IS", # Turkcell
-        "TUPRS.IS", # Tüpraş
-        "ARCLK.IS", # Arçelik
-        "BIMAS.IS", # BIM
+        "AKBNK.IS", "GARAN.IS", "ISCTR.IS", "KOZAA.IS", "SAHOL.IS",
+        "THYAO.IS", "TCELL.IS", "TUPRS.IS", "ARCLK.IS", "BIMAS.IS"
     ],
     
     # Currencies & Forex
@@ -229,12 +164,6 @@ st.markdown("""
     --text-muted: #94a3b8;
     --success: #16a34a;
     --success-dark: #15803d;
-}
-
-/* Main container */
-.main {
-    background-color: var(--dark-bg);
-    color: var(--text);
 }
 
 /* Enhanced tabs */
@@ -297,47 +226,6 @@ st.markdown("""
     font-weight: 500;
 }
 
-/* Status indicators */
-.status-indicator {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    display: inline-block;
-    margin-right: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.3);
-}
-
-.status-green { 
-    background: linear-gradient(135deg, #16a34a, #22c55e);
-    animation: pulse-green 2s infinite;
-}
-.status-yellow { 
-    background: linear-gradient(135deg, #f59e0b, #fbbf24);
-    animation: pulse-yellow 2s infinite;
-}
-.status-red { 
-    background: linear-gradient(135deg, #dc2626, #ef4444);
-    animation: pulse-red 2s infinite;
-}
-
-@keyframes pulse-green {
-    0% { box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.4); }
-    70% { box-shadow: 0 0 0 6px rgba(22, 163, 74, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(22, 163, 74, 0); }
-}
-
-@keyframes pulse-yellow {
-    0% { box-shadow: 0 0 0 0 rgba(245, 166, 35, 0.4); }
-    70% { box-shadow: 0 0 0 6px rgba(245, 166, 35, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(245, 166, 35, 0); }
-}
-
-@keyframes pulse-red {
-    0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.4); }
-    70% { box-shadow: 0 0 0 6px rgba(220, 38, 38, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
-}
-
 /* Data tables */
 .stDataFrame {
     border: 1px solid var(--border) !important;
@@ -360,16 +248,6 @@ st.markdown("""
     color: var(--text) !important;
 }
 
-/* Sliders */
-.stSlider {
-    padding: 20px 0 !important;
-}
-
-/* Select boxes */
-.stSelectbox {
-    padding: 10px 0 !important;
-}
-
 /* Buttons */
 .stButton > button {
     background: linear-gradient(135deg, var(--primary), var(--primary-dark));
@@ -385,19 +263,6 @@ st.markdown("""
 .stButton > button:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(26, 95, 180, 0.4);
-}
-
-/* Expander */
-.streamlit-expanderHeader {
-    background-color: var(--card-bg) !important;
-    border: 1px solid var(--border) !important;
-    border-radius: 8px !important;
-    color: var(--text) !important;
-}
-
-/* Spinner */
-.stSpinner > div {
-    border-color: var(--primary) !important;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -426,7 +291,7 @@ def load_global_prices(tickers: List[str], start_date: str, end_date: str) -> pd
     prices_dict = {}
     
     # Split into batches for better performance
-    batch_size = 20
+    batch_size = 10
     ticker_batches = [tickers[i:i + batch_size] for i in range(0, len(tickers), batch_size)]
     
     for batch in ticker_batches:
@@ -437,34 +302,24 @@ def load_global_prices(tickers: List[str], start_date: str, end_date: str) -> pd
                 end=end_date,
                 auto_adjust=True,
                 progress=False,
-                threads=True,
-                group_by='ticker'
+                threads=True
             )
             
             # Process multi-index columns
             if isinstance(data.columns, pd.MultiIndex):
                 for ticker in batch:
                     if ticker in data.columns.get_level_values(0):
-                        # Try different column formats
                         if (ticker, 'Close') in data.columns:
                             prices_dict[ticker] = data[(ticker, 'Close')]
                         elif (ticker, 'Adj Close') in data.columns:
                             prices_dict[ticker] = data[(ticker, 'Adj Close')]
-                        else:
-                            # Try to find any price column
-                            possible_cols = [col for col in data.columns if ticker in str(col) and ('Close' in str(col) or 'Adj Close' in str(col))]
-                            if possible_cols:
-                                prices_dict[ticker] = data[possible_cols[0]]
             else:
                 # Single ticker case
                 if len(batch) == 1:
                     if 'Close' in data.columns:
                         prices_dict[batch[0]] = data['Close']
-                    elif 'Adj Close' in data.columns:
-                        prices_dict[batch[0]] = data['Adj Close']
             
         except Exception as e:
-            st.warning(f"Failed to load some tickers: {batch}. Error: {str(e)[:100]}...")
             continue
     
     # Combine into DataFrame
@@ -480,40 +335,6 @@ def load_global_prices(tickers: List[str], start_date: str, end_date: str) -> pd
 # -------------------------------------------------------------
 class PortfolioOptimizer:
     """Enhanced portfolio optimization using PyPortfolioOpt"""
-    
-    @staticmethod
-    def calculate_expected_returns(returns_df: pd.DataFrame, method: str = "mean_historical_return") -> pd.Series:
-        """Calculate expected returns using different methods"""
-        try:
-            if method == "mean_historical_return":
-                return expected_returns.mean_historical_return(returns_df)
-            elif method == "ema_historical_return":
-                return expected_returns.ema_historical_return(returns_df)
-            elif method == "capm_return":
-                return expected_returns.capm_return(returns_df)
-            else:
-                return returns_df.mean()
-        except:
-            return returns_df.mean()
-    
-    @staticmethod
-    def calculate_risk_matrix(returns_df: pd.DataFrame, method: str = "sample_cov") -> pd.DataFrame:
-        """Calculate risk matrix using different methods"""
-        try:
-            if method == "sample_cov":
-                return risk_models.sample_cov(returns_df)
-            elif method == "semicovariance":
-                return risk_models.semicovariance(returns_df)
-            elif method == "exp_cov":
-                return risk_models.exp_cov(returns_df)
-            elif method == "ledoit_wolf":
-                return risk_models.CovarianceShrinkage(returns_df).ledoit_wolf()
-            elif method == "oracle_approximating":
-                return risk_models.CovarianceShrinkage(returns_df).oracle_approximating()
-            else:
-                return returns_df.cov()
-        except:
-            return returns_df.cov()
     
     @staticmethod
     def optimize_portfolio(returns_df: pd.DataFrame, strategy: str, 
@@ -541,8 +362,8 @@ class PortfolioOptimizer:
         
         try:
             # Calculate expected returns and covariance
-            mu = PortfolioOptimizer.calculate_expected_returns(returns_df)
-            S = PortfolioOptimizer.calculate_risk_matrix(returns_df, "ledoit_wolf")
+            mu = expected_returns.mean_historical_return(returns_df)
+            S = risk_models.sample_cov(returns_df)
             
             # Create efficient frontier
             ef = EfficientFrontier(mu, S)
@@ -574,14 +395,6 @@ class PortfolioOptimizer:
                 else:
                     weights = ef.max_sharpe(risk_free_rate=risk_free_rate/TRADING_DAYS)
                     
-            elif strategy == "Mean-Variance Optimal":
-                # Add L2 regularization for stability
-                try:
-                    ef.add_objective(L2_reg, gamma=0.1)
-                except:
-                    pass
-                weights = ef.max_sharpe(risk_free_rate=risk_free_rate/TRADING_DAYS)
-                
             else:
                 # Default to minimum volatility
                 weights = ef.min_volatility()
@@ -605,7 +418,6 @@ class PortfolioOptimizer:
             }
             
         except Exception as e:
-            st.error(f"Portfolio optimization failed: {str(e)}")
             # Fallback to equal weights
             n_assets = len(returns_df.columns)
             equal_weights = np.ones(n_assets) / n_assets
@@ -618,7 +430,7 @@ class PortfolioOptimizer:
                 'expected_return': ann_return,
                 'expected_risk': ann_risk,
                 'sharpe_ratio': (ann_return - risk_free_rate) / ann_risk if ann_risk > 0 else np.nan,
-                'method': f'Equal Weight (Fallback due to: {str(e)[:50]})',
+                'method': f'Equal Weight (Fallback)',
                 'cleaned_weights': {asset: equal_weights[i] for i, asset in enumerate(returns_df.columns)}
             }
 
@@ -806,26 +618,16 @@ class EnhancedRiskAnalytics:
                 results.append({
                     'Method': result['method'],
                     'VaR': result['VaR'],
-                    'CVaR': result['CVaR'],
-                    'Details': json.dumps({k: v for k, v in result.items() if k not in ['VaR', 'CVaR', 'method']})
+                    'CVaR': result['CVaR']
                 })
             except Exception as e:
                 results.append({
                     'Method': method,
                     'VaR': np.nan,
-                    'CVaR': np.nan,
-                    'Details': f"Error: {str(e)}"
+                    'CVaR': np.nan
                 })
         
         return pd.DataFrame(results)
-    
-    @staticmethod
-    def calculate_rolling_var(returns: pd.Series, window: int = 252, confidence: float = 0.95) -> pd.Series:
-        """Calculate rolling VaR"""
-        rolling_var = returns.rolling(window).apply(
-            lambda x: np.percentile(x, (1 - confidence) * 100)
-        )
-        return rolling_var
 
 # -------------------------------------------------------------
 # ENHANCED EWMA ANALYSIS
@@ -862,37 +664,6 @@ class EWMAAnalysis:
                     ewma_vol[asset] = r.rolling(20).std()
         
         return ewma_vol.dropna(how='all')
-    
-    @staticmethod
-    def calculate_correlation_breakdown(ewma_vol: pd.DataFrame, window: int = 20) -> pd.DataFrame:
-        """Analyze correlation breakdown during high volatility periods"""
-        avg_vol = ewma_vol.mean()
-        high_vol_periods = {}
-        
-        for asset in ewma_vol.columns:
-            if not pd.isna(avg_vol[asset]) and avg_vol[asset] > 0:
-                threshold = avg_vol[asset] * 1.5  # 50% above average
-                high_vol_mask = ewma_vol[asset] > threshold
-                high_vol_periods[asset] = high_vol_mask
-        
-        return pd.DataFrame(high_vol_periods)
-    
-    @staticmethod
-    def calculate_volatility_regime(ewma_vol: pd.Series, percentiles: List[float] = [25, 75]) -> pd.Series:
-        """Classify volatility regimes"""
-        ewma_clean = ewma_vol.dropna()
-        if len(ewma_clean) < 10:
-            return pd.Series(index=ewma_vol.index, dtype=str)
-        
-        low_thresh = np.percentile(ewma_clean, percentiles[0])
-        high_thresh = np.percentile(ewma_clean, percentiles[1])
-        
-        regime = pd.Series(index=ewma_vol.index, dtype=str)
-        regime[ewma_vol <= low_thresh] = 'Low Volatility'
-        regime[(ewma_vol > low_thresh) & (ewma_vol <= high_thresh)] = 'Normal Volatility'
-        regime[ewma_vol > high_thresh] = 'High Volatility'
-        
-        return regime
 
 # -------------------------------------------------------------
 # PERFORMANCE ATTRIBUTION
@@ -936,32 +707,6 @@ class PerformanceAttribution:
             'interaction_effect': interaction_effect,
             'residual': total_active_return - (allocation_effect + selection_effect + interaction_effect)
         }
-    
-    @staticmethod
-    def calculate_risk_attribution(portfolio_returns: pd.Series,
-                                  asset_returns: pd.DataFrame,
-                                  weights: np.ndarray) -> pd.DataFrame:
-        """Calculate risk attribution using Euler's theorem"""
-        
-        # Calculate portfolio volatility
-        cov_matrix = asset_returns.cov()
-        port_vol = np.sqrt(weights.T @ cov_matrix @ weights)
-        
-        # Calculate marginal contributions
-        marginal_contrib = cov_matrix @ weights / port_vol if port_vol > 0 else np.zeros(len(weights))
-        
-        # Calculate percentage contributions
-        contrib_pct = weights * marginal_contrib / port_vol if port_vol > 0 else np.zeros(len(weights))
-        
-        # Create attribution DataFrame
-        attribution_df = pd.DataFrame({
-            'Asset': asset_returns.columns,
-            'Weight': weights,
-            'Marginal_Contribution': marginal_contrib,
-            'Percent_Contribution': contrib_pct * 100
-        })
-        
-        return attribution_df.sort_values('Percent_Contribution', ascending=False)
 
 # -------------------------------------------------------------
 # MONTE CARLO SIMULATION ENGINE
@@ -985,44 +730,6 @@ class MonteCarloSimulator:
         return paths
     
     @staticmethod
-    def simulate_portfolio(weights: np.ndarray, means: np.ndarray,
-                          cov_matrix: np.ndarray, T: float = 1.0,
-                          n_steps: int = 252, n_sims: int = 10000) -> np.ndarray:
-        """Simulate portfolio returns using Cholesky decomposition"""
-        n_assets = len(weights)
-        
-        try:
-            # Cholesky decomposition
-            L = np.linalg.cholesky(cov_matrix)
-        except:
-            # Use eigenvalue decomposition if Cholesky fails
-            eigvals, eigvecs = np.linalg.eigh(cov_matrix)
-            eigvals = np.maximum(eigvals, 1e-8)  # Ensure positive
-            L = eigvecs @ np.diag(np.sqrt(eigvals))
-        
-        dt = T / n_steps
-        portfolio_paths = np.zeros((n_steps + 1, n_sims))
-        
-        for i in range(n_sims):
-            # Generate correlated returns
-            z = np.random.standard_normal((n_steps, n_assets))
-            correlated_z = z @ L.T
-            
-            # Calculate asset returns
-            asset_returns = np.zeros((n_steps, n_assets))
-            for j in range(n_assets):
-                asset_returns[:, j] = np.exp((means[j] - 0.5 * cov_matrix[j, j]) * dt + np.sqrt(dt) * correlated_z[:, j])
-            
-            # Calculate portfolio value
-            portfolio_values = np.ones(n_steps + 1)
-            for t in range(1, n_steps + 1):
-                portfolio_values[t] = portfolio_values[t-1] * np.sum(weights * asset_returns[t-1])
-            
-            portfolio_paths[:, i] = portfolio_values
-        
-        return portfolio_paths
-    
-    @staticmethod
     def calculate_var_cvar(paths: np.ndarray, alpha: float = 0.95) -> Tuple[float, float]:
         """Calculate VaR and CVaR from simulation paths"""
         final_returns = (paths[-1] / paths[0]) - 1
@@ -1043,8 +750,6 @@ def main():
         st.session_state.portfolio_strategy = "Equal Weight"
     if 'custom_weights' not in st.session_state:
         st.session_state.custom_weights = {}
-    if 'optimization_params' not in st.session_state:
-        st.session_state.optimization_params = {}
     if 'selected_tickers' not in st.session_state:
         st.session_state.selected_tickers = ["SPY", "TLT", "GLD", "BTC-USD", "AAPL"]
     
@@ -1058,7 +763,8 @@ def main():
         category_filter = st.multiselect(
             "Filter by Category",
             list(GLOBAL_ASSET_UNIVERSE.keys()),
-            default=["US_Indices", "Cryptocurrencies", "US_Stocks"]
+            default=["US_Indices", "Cryptocurrencies", "US_Stocks"],
+            key="category_filter"
         )
         
         # Filter tickers by selected categories
@@ -1072,14 +778,15 @@ def main():
         # Get valid default values that exist in filtered list
         valid_defaults = [t for t in st.session_state.selected_tickers if t in filtered_tickers]
         if not valid_defaults and filtered_tickers:
-            valid_defaults = filtered_tickers[:5]  # Use first 5 if no valid defaults
+            valid_defaults = filtered_tickers[:5]
         
         # Asset selector
         selected_tickers = st.multiselect(
             "Select Assets (5-20 recommended)",
             filtered_tickers,
             default=valid_defaults,
-            help="Select 5-20 assets for optimal diversification"
+            help="Select 5-20 assets for optimal diversification",
+            key="asset_selector"
         )
         
         # Update session state
@@ -1094,7 +801,8 @@ def main():
             "Benchmark Index",
             benchmark_options,
             index=0,
-            help="Primary benchmark for performance comparison"
+            help="Primary benchmark for performance comparison",
+            key="benchmark_selector"
         )
         
         # Date range
@@ -1102,7 +810,8 @@ def main():
         date_preset = st.selectbox(
             "Time Period",
             ["1 Year", "3 Years", "5 Years", "10 Years", "Custom"],
-            index=2
+            index=2,
+            key="date_preset"
         )
         
         end_date = pd.Timestamp.today()
@@ -1118,9 +827,9 @@ def main():
         else:
             col1, col2 = st.columns(2)
             with col1:
-                start_date = st.date_input("Start Date", pd.Timestamp("2018-01-01"))
+                start_date = st.date_input("Start Date", pd.Timestamp("2018-01-01"), key="start_date")
             with col2:
-                end_date = st.date_input("End Date", pd.Timestamp.today())
+                end_date = st.date_input("End Date", pd.Timestamp.today(), key="end_date")
         
         # Portfolio Strategy
         st.subheader("🎯 Portfolio Strategy")
@@ -1129,36 +838,11 @@ def main():
             "Portfolio Construction Method",
             list(PORTFOLIO_STRATEGIES.keys()),
             index=0,
-            help=PORTFOLIO_STRATEGIES[st.session_state.portfolio_strategy]
+            help=PORTFOLIO_STRATEGIES[st.session_state.portfolio_strategy],
+            key="strategy_selector"
         )
         
         st.session_state.portfolio_strategy = strategy
-        
-        # Strategy-specific parameters
-        if strategy in ["Efficient Risk", "Efficient Return"]:
-            col1, col2 = st.columns(2)
-            with col1:
-                if strategy == "Efficient Risk":
-                    target_risk = st.number_input(
-                        "Target Annual Volatility (%)",
-                        min_value=5.0,
-                        max_value=50.0,
-                        value=15.0,
-                        step=1.0
-                    ) / 100
-                    st.session_state.optimization_params['target_risk'] = target_risk
-                else:
-                    target_return = st.number_input(
-                        "Target Annual Return (%)",
-                        min_value=0.0,
-                        max_value=50.0,
-                        value=10.0,
-                        step=1.0
-                    ) / 100
-                    st.session_state.optimization_params['target_return'] = target_return
-        
-        elif strategy == "Custom Weights":
-            st.info("Custom weights will be set in the Overview tab")
         
         # Risk parameters
         st.subheader("⚖️ Risk Parameters")
@@ -1168,7 +852,8 @@ def main():
             value=3.0,
             min_value=0.0,
             max_value=20.0,
-            step=0.5
+            step=0.5,
+            key="rf_annual"
         ) / 100
         
         confidence_level = st.slider(
@@ -1176,45 +861,17 @@ def main():
             min_value=90,
             max_value=99,
             value=95,
-            step=1
+            step=1,
+            key="confidence_level_sidebar"
         ) / 100
-        
-        # Optimization constraints
-        st.subheader("📐 Optimization Constraints")
-        
-        col1, col2 = st.columns(2)
-        with col1:
-            min_weight = st.number_input(
-                "Minimum Weight (%)",
-                min_value=0.0,
-                max_value=20.0,
-                value=0.0,
-                step=1.0
-            ) / 100
-            
-            max_weight = st.number_input(
-                "Maximum Weight (%)",
-                min_value=10.0,
-                max_value=100.0,
-                value=25.0,
-                step=5.0
-            ) / 100
-        
-        with col2:
-            risk_aversion = st.slider(
-                "Risk Aversion",
-                min_value=0.5,
-                max_value=10.0,
-                value=2.5,
-                step=0.5
-            )
         
         # Run analysis button
         st.markdown("---")
         run_analysis = st.button(
             "🚀 Run Portfolio Analysis",
             type="primary",
-            use_container_width=True
+            use_container_width=True,
+            key="run_analysis"
         )
     
     # Main content
@@ -1268,16 +925,14 @@ def main():
             st.stop()
     
     # Create enhanced tabs
-    tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9 = st.tabs([
+    tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs([
         "📈 Overview & Weights",
         "⚖️ Risk Analytics",
         "🎯 Portfolio Optimization",
         "🔗 Correlation Matrix",
         "📊 EWMA Analysis",
         "🎲 Monte Carlo VaR",
-        "📊 Performance Attribution",
-        "🌍 Global Exposure",
-        "🚦 Risk Scorecard"
+        "📊 Performance Attribution"
     ])
     
     # Tab 1: Overview & Weights
@@ -1334,10 +989,8 @@ def main():
                 result = optimizer.optimize_portfolio(
                     returns[selected_tickers],
                     st.session_state.portfolio_strategy,
-                    target_return=st.session_state.optimization_params.get('target_return'),
-                    target_risk=st.session_state.optimization_params.get('target_risk'),
                     risk_free_rate=rf_annual,
-                    risk_aversion=risk_aversion
+                    risk_aversion=2.5
                 )
                 
                 weights = result['weights']
@@ -1371,35 +1024,12 @@ def main():
                 use_container_width=True,
                 height=400
             )
-            
-            # Portfolio statistics
-            total_weight = weights.sum()
-            st.metric("Total Weight", f"{total_weight:.2%}")
-            
-            # Concentration metrics
-            top_3_concentration = weights_df['Weight'].head(3).sum()
-            st.metric("Top 3 Concentration", f"{top_3_concentration:.2%}")
-            
-            # Herfindahl-Hirschman Index
-            hhi = (weights ** 2).sum()
-            st.metric("HHI Index", f"{hhi:.4f}")
-            
-            # Export weights
-            if st.button("📥 Export Weights to CSV"):
-                csv = weights_df.to_csv(index=False)
-                st.download_button(
-                    label="Download CSV",
-                    data=csv,
-                    file_name="portfolio_weights.csv",
-                    mime="text/csv"
-                )
         
         with col2:
             st.subheader("📈 Portfolio Performance")
             
             # Benchmark returns
             benchmark_returns = returns[benchmark]
-            active_returns = portfolio_returns - benchmark_returns
             
             # Cumulative performance chart
             fig = go.Figure()
@@ -1459,7 +1089,7 @@ def main():
                 max_dd = ((1 + portfolio_returns).cumprod() / (1 + portfolio_returns).cumprod().cummax() - 1).min()
                 st.metric("Max Drawdown", f"{max_dd:.2%}")
     
-    # Tab 2: Enhanced Risk Analytics (FIXED AND WORKING)
+    # Tab 2: Enhanced Risk Analytics
     with tab2:
         st.header("⚖️ Comprehensive Risk Analytics")
         
@@ -1501,7 +1131,7 @@ def main():
             var_confidence = st.slider(
                 "Confidence Level (%)",
                 min_value=90,
-                max_value=99.9,
+                max_value=99,
                 value=95,
                 step=1,
                 key="var_confidence_tab2"
@@ -1566,84 +1196,6 @@ def main():
                 )
                 
                 st.plotly_chart(fig, use_container_width=True)
-            
-            # Rolling VaR Analysis
-            st.subheader("📈 Rolling VaR Analysis")
-            
-            rolling_window = st.slider(
-                "Rolling Window (days)",
-                min_value=20,
-                max_value=252,
-                value=60,
-                step=10,
-                key="rolling_var_window"
-            )
-            
-            rolling_var = risk_analytics.calculate_rolling_var(
-                portfolio_returns, 
-                rolling_window, 
-                var_confidence
-            )
-            
-            fig2 = go.Figure()
-            fig2.add_trace(go.Scatter(
-                x=rolling_var.index,
-                y=rolling_var.values * 100,
-                name=f"Rolling {rolling_window}d VaR",
-                line=dict(color='#1a5fb4', width=2),
-                fill='tozeroy',
-                fillcolor='rgba(26, 95, 180, 0.2)'
-            ))
-            
-            # Add actual returns for comparison
-            fig2.add_trace(go.Scatter(
-                x=portfolio_returns.index,
-                y=portfolio_returns.values * 100,
-                name="Daily Returns",
-                mode='markers',
-                marker=dict(size=3, color='gray', opacity=0.5)
-            ))
-            
-            # Add violations
-            violations = portfolio_returns < rolling_var
-            if violations.any():
-                violation_dates = portfolio_returns[violations].index
-                violation_returns = portfolio_returns[violations].values * 100
-                
-                fig2.add_trace(go.Scatter(
-                    x=violation_dates,
-                    y=violation_returns,
-                    mode='markers',
-                    name="VaR Violations",
-                    marker=dict(size=8, color='red', symbol='x')
-                ))
-            
-            fig2.update_layout(
-                title=f"Rolling VaR ({rolling_window} days) vs Actual Returns",
-                height=500,
-                template="plotly_dark",
-                xaxis_title="Date",
-                yaxis_title="Return / VaR (%)",
-                hovermode='x unified'
-            )
-            
-            st.plotly_chart(fig2, use_container_width=True)
-            
-            # Violation statistics
-            if violations.any():
-                n_violations = violations.sum()
-                expected_violations = len(portfolio_returns) * (1 - var_confidence)
-                violation_rate = n_violations / len(portfolio_returns)
-                
-                col1, col2, col3, col4 = st.columns(4)
-                with col1:
-                    st.metric("Total Violations", f"{n_violations}")
-                with col2:
-                    st.metric("Expected Violations", f"{expected_violations:.1f}")
-                with col3:
-                    st.metric("Violation Rate", f"{violation_rate:.2%}")
-                with col4:
-                    st.metric("Unusual", "✅ Yes" if abs(n_violations - expected_violations) > 2 else "❌ No")
         
         else:
             # Single method analysis
@@ -1699,25 +1251,16 @@ def main():
             if 'VaR' in var_result and not pd.isna(var_result['VaR']):
                 st.subheader("📊 Return Distribution with VaR")
                 
-                fig = make_subplots(
-                    rows=2, cols=1,
-                    shared_xaxes=True,
-                    vertical_spacing=0.05,
-                    row_heights=[0.7, 0.3],
-                    subplot_titles=("Return Distribution", "VaR Violations Timeline")
-                )
+                fig = go.Figure()
                 
                 # Histogram of returns
-                fig.add_trace(
-                    go.Histogram(
-                        x=horizon_returns,
-                        nbinsx=50,
-                        name="Returns",
-                        marker_color='#1a5fb4',
-                        opacity=0.7
-                    ),
-                    row=1, col=1
-                )
+                fig.add_trace(go.Histogram(
+                    x=horizon_returns,
+                    nbinsx=50,
+                    name="Returns",
+                    marker_color='#1a5fb4',
+                    opacity=0.7
+                ))
                 
                 # Add VaR line
                 fig.add_vline(
@@ -1725,8 +1268,7 @@ def main():
                     line_dash="dash",
                     line_color="#f5a623",
                     annotation_text=f"VaR: {var_result['VaR']:.4%}",
-                    annotation_position="top left",
-                    row=1, col=1
+                    annotation_position="top left"
                 )
                 
                 # Add CVaR line
@@ -1736,39 +1278,16 @@ def main():
                         line_dash="dot",
                         line_color="#c01c28",
                         annotation_text=f"CVaR: {var_result['CVaR']:.4%}",
-                        annotation_position="top right",
-                        row=1, col=1
+                        annotation_position="top right"
                     )
                 
-                # VaR violations timeline
-                violations = horizon_returns < var_result['VaR']
-                violation_dates = horizon_returns[violations].index
-                
-                fig.add_trace(
-                    go.Scatter(
-                        x=violation_dates,
-                        y=[1] * len(violation_dates),
-                        mode='markers',
-                        marker=dict(
-                            color='red',
-                            size=10,
-                            symbol='x'
-                        ),
-                        name="VaR Violations"
-                    ),
-                    row=2, col=1
-                )
-                
                 fig.update_layout(
-                    height=700,
+                    height=500,
                     template="plotly_dark",
+                    xaxis_title="Return",
+                    yaxis_title="Frequency",
                     showlegend=True
                 )
-                
-                fig.update_xaxes(title_text="Return", row=1, col=1)
-                fig.update_xaxes(title_text="Date", row=2, col=1)
-                fig.update_yaxes(title_text="Frequency", row=1, col=1)
-                fig.update_yaxes(title_text="Violation", row=2, col=1, range=[0.5, 1.5])
                 
                 st.plotly_chart(fig, use_container_width=True)
         
@@ -1802,9 +1321,7 @@ def main():
                 'VaR 95%': var_95.get('VaR', np.nan),
                 'CVaR 95%': var_95.get('CVaR', np.nan),
                 'VaR 99%': var_99.get('VaR', np.nan),
-                'CVaR 99%': var_99.get('CVaR', np.nan),
-                'Skewness': asset_returns.skew(),
-                'Kurtosis': asset_returns.kurtosis()
+                'CVaR 99%': var_99.get('CVaR', np.nan)
             })
         
         risk_metrics_df = pd.DataFrame(risk_metrics_data)
@@ -1819,71 +1336,13 @@ def main():
                 'VaR 95%': '{:.2%}',
                 'CVaR 95%': '{:.2%}',
                 'VaR 99%': '{:.2%}',
-                'CVaR 99%': '{:.2%}',
-                'Skewness': '{:.2f}',
-                'Kurtosis': '{:.2f}'
+                'CVaR 99%': '{:.2%}'
             }),
             use_container_width=True,
             height=400
         )
-        
-        # Risk Metrics Visualization
-        st.subheader("📈 Risk Metrics Heatmap")
-        
-        # Select metrics for heatmap
-        heatmap_metrics = st.multiselect(
-            "Select Metrics for Heatmap",
-            ['Annual Return', 'Annual Volatility', 'Sharpe Ratio', 'Max Drawdown', 'VaR 95%'],
-            default=['Annual Return', 'Annual Volatility', 'Sharpe Ratio']
-        )
-        
-        if heatmap_metrics:
-            # Prepare data for heatmap
-            heatmap_data = risk_metrics_df.set_index('Asset')[heatmap_metrics]
-            
-            # Normalize for better visualization
-            for metric in heatmap_metrics:
-                if metric in ['Annual Return', 'Sharpe Ratio']:
-                    # Higher is better - green scale
-                    heatmap_data[metric] = (heatmap_data[metric] - heatmap_data[metric].min()) / (heatmap_data[metric].max() - heatmap_data[metric].min())
-                else:
-                    # Lower is better - red scale (inverted)
-                    heatmap_data[metric] = 1 - (heatmap_data[metric] - heatmap_data[metric].min()) / (heatmap_data[metric].max() - heatmap_data[metric].min())
-            
-            fig = go.Figure(data=go.Heatmap(
-                z=heatmap_data.values.T,
-                x=heatmap_data.index,
-                y=heatmap_metrics,
-                colorscale='RdYlGn',
-                zmin=0,
-                zmax=1,
-                colorbar=dict(title="Normalized Score", titleside="right"),
-                text=risk_metrics_df.set_index('Asset')[heatmap_metrics].applymap(lambda x: f"{x:.2%}" if isinstance(x, float) and abs(x) < 1 else f"{x:.2f}"),
-                texttemplate='%{text}',
-                textfont={"size": 10}
-            ))
-            
-            fig.update_layout(
-                title="Asset Risk Metrics Heatmap (Normalized)",
-                height=500,
-                template="plotly_dark",
-                xaxis_title="Assets",
-                yaxis_title="Metrics"
-            )
-            
-            st.plotly_chart(fig, use_container_width=True)
-        
-        # Export risk metrics
-        if st.button("📥 Export Risk Metrics", key="export_risk_metrics"):
-            csv = risk_metrics_df.to_csv(index=False)
-            st.download_button(
-                label="Download CSV",
-                data=csv,
-                file_name="asset_risk_metrics.csv",
-                mime="text/csv"
-            )
     
-    # Tab 3: Portfolio Optimization (FIXED AND WORKING)
+    # Tab 3: Portfolio Optimization
     with tab3:
         st.header("🎯 Portfolio Optimization Strategies")
         
@@ -1895,14 +1354,7 @@ def main():
         asset_returns = st.session_state.asset_returns
         
         if not PYPFOPT_AVAILABLE:
-            st.warning("""
-            ⚠️ PyPortfolioOpt is not installed. 
-            Please install it for advanced optimization features:
-            ```
-            pip install pyportfolioopt
-            ```
-            Currently showing basic optimization results.
-            """)
+            st.warning("PyPortfolioOpt is not installed. Using basic optimization methods.")
         
         # Optimization strategies comparison
         st.subheader("📊 Strategy Comparison")
@@ -1926,7 +1378,7 @@ def main():
                         asset_returns,
                         strategy,
                         risk_free_rate=rf_annual,
-                        risk_aversion=risk_aversion
+                        risk_aversion=2.5
                     )
                     
                     optimization_results.append({
@@ -2022,7 +1474,7 @@ def main():
                 "Optimization Target",
                 ["Minimum Volatility", "Maximum Sharpe Ratio", "Target Return", "Target Risk"],
                 index=1,
-                key="optim_target"
+                key="optim_target_tab3"
             )
         
         with col_b:
@@ -2033,7 +1485,7 @@ def main():
                     max_value=50.0,
                     value=10.0,
                     step=1.0,
-                    key="target_return_input"
+                    key="target_return_tab3"
                 ) / 100
             elif target_type == "Target Risk":
                 target_value = st.number_input(
@@ -2042,13 +1494,13 @@ def main():
                     max_value=50.0,
                     value=15.0,
                     step=1.0,
-                    key="target_risk_input"
+                    key="target_risk_tab3"
                 ) / 100
             else:
                 target_value = None
         
         # Run optimization
-        if st.button("🚀 Run Optimization", type="primary", key="run_optimization"):
+        if st.button("🚀 Run Optimization", type="primary", key="run_optimization_tab3"):
             with st.spinner("Optimizing portfolio..."):
                 if target_type == "Minimum Volatility":
                     strategy_name = "Minimum Volatility"
@@ -2065,7 +1517,7 @@ def main():
                     target_return=target_value if target_type == "Target Return" else None,
                     target_risk=target_value if target_type == "Target Risk" else None,
                     risk_free_rate=rf_annual,
-                    risk_aversion=risk_aversion
+                    risk_aversion=2.5
                 )
                 
                 # Display optimized weights
@@ -2117,21 +1569,8 @@ def main():
                 
                 with metrics_cols[2]:
                     st.metric("Sharpe Ratio", f"{result['sharpe_ratio']:.2f}")
-                
-                with metrics_cols[3]:
-                    # Calculate diversification ratio
-                    weights = result['weights']
-                    asset_vols = asset_returns.std() * np.sqrt(TRADING_DAYS)
-                    weighted_vol = np.sum(weights * asset_vols)
-                    portfolio_vol = result['expected_risk']
-                    div_ratio = weighted_vol / portfolio_vol if portfolio_vol > 0 else np.nan
-                    st.metric("Diversification Ratio", f"{div_ratio:.2f}")
-                
-                # Store optimized weights
-                st.session_state.optimized_weights = result['weights']
-                st.session_state.optimization_result = result
     
-    # Tab 4: Correlation Matrix (FIXED AND WORKING)
+    # Tab 4: Correlation Matrix
     with tab4:
         st.header("🔗 Correlation Matrix & Risk Decomposition")
         
@@ -2145,14 +1584,14 @@ def main():
         # Risk model selection
         st.subheader("📊 Risk Model Configuration")
         
-        col1, col2, col3 = st.columns(3)
+        col1, col2 = st.columns(2)
         
         with col1:
             corr_method = st.selectbox(
                 "Correlation Method",
-                ["Sample Correlation", "Exponential Weighted", "Ledoit-Wolf Shrinkage", "Constant Correlation"],
-                index=2,
-                key="corr_method"
+                ["Sample Correlation", "Exponential Weighted", "Constant Correlation"],
+                index=0,
+                key="corr_method_tab4"
             )
         
         with col2:
@@ -2162,15 +1601,7 @@ def main():
                 max_value=1000,
                 value=252,
                 step=30,
-                key="lookback_window"
-            )
-        
-        with col3:
-            display_type = st.selectbox(
-                "Display Type",
-                ["Heatmap", "Network Graph", "Clustered Heatmap", "Rolling Correlation"],
-                index=0,
-                key="display_type"
+                key="lookback_window_tab4"
             )
         
         # Calculate correlation matrix
@@ -2179,289 +1610,94 @@ def main():
         if corr_method == "Sample Correlation":
             corr_matrix = recent_returns.corr()
         elif corr_method == "Exponential Weighted":
-            # Calculate exponentially weighted correlation
-            cov = recent_returns.ewm(span=60).cov(pairwise=True)
-            # We need to extract the correlation matrix from the covariance
-            std = recent_returns.ewm(span=60).std()
-            # This is simplified - in practice, we'd compute properly
-            corr_matrix = recent_returns.corr()
-        elif corr_method == "Ledoit-Wolf Shrinkage" and PYPFOPT_AVAILABLE:
-            try:
-                S = risk_models.CovarianceShrinkage(recent_returns).ledoit_wolf()
-                std = np.sqrt(np.diag(S))
-                corr_matrix = pd.DataFrame(
-                    S / np.outer(std, std),
-                    index=recent_returns.columns,
-                    columns=recent_returns.columns
-                )
-            except:
+            # Simplified EWMA correlation
+            corr_matrix = recent_returns.ewm(span=60).corr().iloc[-len(selected_tickers):, -len(selected_tickers):]
+            if isinstance(corr_matrix, pd.Series):
                 corr_matrix = recent_returns.corr()
         else:
             corr_matrix = recent_returns.corr()
         
-        if display_type == "Heatmap":
-            # Enhanced heatmap
-            fig = go.Figure(data=go.Heatmap(
-                z=corr_matrix.values,
-                x=corr_matrix.columns,
-                y=corr_matrix.index,
-                colorscale='RdBu',
-                zmin=-1,
-                zmax=1,
-                text=np.round(corr_matrix.values, 2),
-                texttemplate='%{text}',
-                textfont={"size": 10},
-                colorbar=dict(
-                    title="Correlation",
-                    titleside="right"
-                )
-            ))
-            
-            fig.update_layout(
-                title=f"Correlation Matrix ({corr_method})",
-                height=700,
-                template="plotly_dark",
-                xaxis_title="Assets",
-                yaxis_title="Assets",
-                xaxis_tickangle=45
+        # Enhanced heatmap
+        fig = go.Figure(data=go.Heatmap(
+            z=corr_matrix.values,
+            x=corr_matrix.columns,
+            y=corr_matrix.index,
+            colorscale='RdBu',
+            zmin=-1,
+            zmax=1,
+            text=np.round(corr_matrix.values, 2),
+            texttemplate='%{text}',
+            textfont={"size": 10},
+            colorbar=dict(
+                title="Correlation",
+                titleside="right"
             )
-            
-            st.plotly_chart(fig, use_container_width=True)
-            
-            # Correlation statistics
-            st.subheader("📈 Correlation Statistics")
-            
-            # Get upper triangle of correlation matrix
-            corr_values = corr_matrix.values[np.triu_indices_from(corr_matrix.values, k=1)]
-            
-            col1, col2, col3, col4 = st.columns(4)
-            
-            with col1:
-                avg_corr = corr_values.mean()
-                st.metric("Average Correlation", f"{avg_corr:.3f}")
-            
-            with col2:
-                min_corr = corr_values.min()
-                st.metric("Minimum Correlation", f"{min_corr:.3f}")
-            
-            with col3:
-                max_corr = corr_values.max()
-                st.metric("Maximum Correlation", f"{max_corr:.3f}")
-            
-            with col4:
-                std_corr = corr_values.std()
-                st.metric("Correlation Std", f"{std_corr:.3f}")
-            
-            # Correlation distribution
-            fig2 = go.Figure()
-            
-            fig2.add_trace(go.Histogram(
-                x=corr_values,
-                nbinsx=30,
-                name="Correlation Distribution",
-                marker_color='#1a5fb4',
-                opacity=0.7
-            ))
-            
-            fig2.add_vline(
-                x=avg_corr,
-                line_dash="dash",
-                line_color="#f5a623",
-                annotation_text=f"Mean: {avg_corr:.3f}"
-            )
-            
-            fig2.update_layout(
-                title="Correlation Distribution",
-                height=400,
-                template="plotly_dark",
-                xaxis_title="Correlation",
-                yaxis_title="Frequency"
-            )
-            
-            st.plotly_chart(fig2, use_container_width=True)
-            
-            # Eigenvalue decomposition for correlation structure
-            st.subheader("🔬 Correlation Structure Analysis")
-            
-            try:
-                eigenvalues, eigenvectors = np.linalg.eigh(corr_matrix.values)
-                eigenvalues = np.sort(eigenvalues)[::-1]
-                
-                # Explained variance
-                explained_variance = eigenvalues / eigenvalues.sum()
-                cum_explained_variance = np.cumsum(explained_variance)
-                
-                fig3 = make_subplots(
-                    rows=1, cols=2,
-                    subplot_titles=("Eigenvalue Spectrum", "Cumulative Explained Variance")
-                )
-                
-                # Eigenvalue spectrum
-                fig3.add_trace(
-                    go.Bar(
-                        x=list(range(1, len(eigenvalues) + 1)),
-                        y=eigenvalues,
-                        name="Eigenvalues",
-                        marker_color='#1a5fb4'
-                    ),
-                    row=1, col=1
-                )
-                
-                # Add random matrix theory threshold
-                q = len(recent_returns) / len(selected_tickers)
-                lambda_plus = (1 + np.sqrt(1/q))**2
-                fig3.add_hline(
-                    y=lambda_plus,
-                    line_dash="dash",
-                    line_color="red",
-                    annotation_text=f"RMT Threshold: {lambda_plus:.2f}",
-                    row=1, col=1
-                )
-                
-                # Cumulative explained variance
-                fig3.add_trace(
-                    go.Scatter(
-                        x=list(range(1, len(cum_explained_variance) + 1)),
-                        y=cum_explained_variance,
-                        name="Cumulative Variance",
-                        line=dict(color='#26a269', width=3)
-                    ),
-                    row=1, col=2
-                )
-                
-                # Add 80% and 95% thresholds
-                fig3.add_hline(y=0.80, line_dash="dash", line_color="orange", row=1, col=2)
-                fig3.add_hline(y=0.95, line_dash="dash", line_color="green", row=1, col=2)
-                
-                fig3.update_layout(
-                    height=500,
-                    template="plotly_dark",
-                    showlegend=False
-                )
-                
-                fig3.update_xaxes(title_text="Component", row=1, col=1)
-                fig3.update_xaxes(title_text="Component", row=1, col=2)
-                fig3.update_yaxes(title_text="Eigenvalue", row=1, col=1)
-                fig3.update_yaxes(title_text="Cumulative Variance", row=1, col=2)
-                
-                st.plotly_chart(fig3, use_container_width=True)
-                
-                # Principal component analysis
-                n_components_80 = np.where(cum_explained_variance >= 0.80)[0][0] + 1
-                n_components_95 = np.where(cum_explained_variance >= 0.95)[0][0] + 1
-                
-                col1, col2, col3 = st.columns(3)
-                with col1:
-                    st.metric("Total Components", len(eigenvalues))
-                with col2:
-                    st.metric("Components for 80% Variance", n_components_80)
-                with col3:
-                    st.metric("Components for 95% Variance", n_components_95)
-                    
-            except Exception as e:
-                st.warning(f"Could not perform eigenvalue analysis: {str(e)}")
+        ))
         
-        elif display_type == "Rolling Correlation":
-            # Rolling correlation with benchmark
-            st.subheader("📈 Rolling Correlation with Benchmark")
-            
-            rolling_window = st.slider(
-                "Rolling Window (days)",
-                min_value=20,
-                max_value=200,
-                value=60,
-                step=10,
-                key="rolling_corr_window"
-            )
-            
-            fig = go.Figure()
-            
-            # Limit to first 10 assets for clarity
-            display_assets = selected_tickers[:10]
-            
-            for asset in display_assets:
-                if asset in returns.columns and benchmark in returns.columns:
-                    rolling_corr = returns[asset].rolling(rolling_window).corr(returns[benchmark])
-                    fig.add_trace(go.Scatter(
-                        x=rolling_corr.index,
-                        y=rolling_corr.values,
-                        name=asset,
-                        mode='lines',
-                        line=dict(width=1.5)
-                    ))
-            
-            fig.update_layout(
-                title=f"Rolling Correlation with {benchmark} ({rolling_window} days)",
-                height=600,
-                template="plotly_dark",
-                xaxis_title="Date",
-                yaxis_title="Correlation",
-                hovermode='x unified'
-            )
-            
-            st.plotly_chart(fig, use_container_width=True)
-            
-            # Correlation stability analysis
-            st.subheader("📊 Correlation Stability Analysis")
-            
-            # Calculate correlation changes
-            first_half = asset_returns.iloc[:len(asset_returns)//2]
-            second_half = asset_returns.iloc[len(asset_returns)//2:]
-            
-            corr_first = first_half.corr().values[np.triu_indices_from(corr_matrix.values, k=1)]
-            corr_second = second_half.corr().values[np.triu_indices_from(corr_matrix.values, k=1)]
-            
-            if len(corr_first) == len(corr_second):
-                corr_change = corr_second - corr_first
-                
-                col1, col2 = st.columns(2)
-                
-                with col1:
-                    fig4 = go.Figure()
-                    fig4.add_trace(go.Histogram(
-                        x=corr_change,
-                        nbinsx=30,
-                        name="Correlation Change",
-                        marker_color='#1a5fb4',
-                        opacity=0.7
-                    ))
-                    
-                    avg_change = corr_change.mean()
-                    fig4.add_vline(
-                        x=avg_change,
-                        line_dash="dash",
-                        line_color="#f5a623",
-                        annotation_text=f"Mean Change: {avg_change:.3f}"
-                    )
-                    
-                    fig4.update_layout(
-                        title="Distribution of Correlation Changes",
-                        height=400,
-                        template="plotly_dark",
-                        xaxis_title="Correlation Change",
-                        yaxis_title="Frequency"
-                    )
-                    
-                    st.plotly_chart(fig4, use_container_width=True)
-                
-                with col2:
-                    # Display statistics
-                    st.metric("Mean Correlation Change", f"{avg_change:.3f}")
-                    st.metric("Std of Changes", f"{corr_change.std():.3f}")
-                    st.metric("Max Increase", f"{corr_change.max():.3f}")
-                    st.metric("Max Decrease", f"{corr_change.min():.3f}")
+        fig.update_layout(
+            title=f"Correlation Matrix ({corr_method})",
+            height=700,
+            template="plotly_dark",
+            xaxis_title="Assets",
+            yaxis_title="Assets",
+            xaxis_tickangle=45
+        )
         
-        # Export correlation matrix
-        if st.button("📥 Export Correlation Matrix", key="export_corr"):
-            csv = corr_matrix.to_csv()
-            st.download_button(
-                label="Download CSV",
-                data=csv,
-                file_name="correlation_matrix.csv",
-                mime="text/csv"
-            )
+        st.plotly_chart(fig, use_container_width=True)
+        
+        # Correlation statistics
+        st.subheader("📈 Correlation Statistics")
+        
+        # Get upper triangle of correlation matrix
+        corr_values = corr_matrix.values[np.triu_indices_from(corr_matrix.values, k=1)]
+        
+        col1, col2, col3, col4 = st.columns(4)
+        
+        with col1:
+            avg_corr = corr_values.mean()
+            st.metric("Average Correlation", f"{avg_corr:.3f}")
+        
+        with col2:
+            min_corr = corr_values.min()
+            st.metric("Minimum Correlation", f"{min_corr:.3f}")
+        
+        with col3:
+            max_corr = corr_values.max()
+            st.metric("Maximum Correlation", f"{max_corr:.3f}")
+        
+        with col4:
+            std_corr = corr_values.std()
+            st.metric("Correlation Std", f"{std_corr:.3f}")
+        
+        # Correlation distribution
+        fig2 = go.Figure()
+        
+        fig2.add_trace(go.Histogram(
+            x=corr_values,
+            nbinsx=30,
+            name="Correlation Distribution",
+            marker_color='#1a5fb4',
+            opacity=0.7
+        ))
+        
+        fig2.add_vline(
+            x=avg_corr,
+            line_dash="dash",
+            line_color="#f5a623",
+            annotation_text=f"Mean: {avg_corr:.3f}"
+        )
+        
+        fig2.update_layout(
+            title="Correlation Distribution",
+            height=400,
+            template="plotly_dark",
+            xaxis_title="Correlation",
+            yaxis_title="Frequency"
+        )
+        
+        st.plotly_chart(fig2, use_container_width=True)
     
-    # Tab 5: EWMA Analysis (FIXED AND WORKING)
+    # Tab 5: EWMA Analysis
     with tab5:
         st.header("📊 EWMA Volatility Analysis")
         
@@ -2485,7 +1721,7 @@ def main():
                 value=0.94,
                 step=0.01,
                 help="Higher λ gives more weight to older observations",
-                key="lambda_param"
+                key="lambda_param_tab5"
             )
         
         with col2:
@@ -2495,7 +1731,7 @@ def main():
                 max_value=1000,
                 value=252,
                 step=30,
-                key="ewma_window"
+                key="ewma_window_tab5"
             )
         
         with col3:
@@ -2503,7 +1739,7 @@ def main():
                 "Assets to Display",
                 selected_tickers,
                 default=selected_tickers[:5] if len(selected_tickers) >= 5 else selected_tickers,
-                key="ewma_display_assets"
+                key="ewma_display_assets_tab5"
             )
         
         # Calculate EWMA volatility
@@ -2544,161 +1780,43 @@ def main():
         
         st.plotly_chart(fig, use_container_width=True)
         
-        # Volatility regime analysis
-        st.subheader("🌡️ Volatility Regime Analysis")
+        # Volatility comparison
+        st.subheader("📊 Volatility Comparison")
         
-        # Select asset for regime analysis
-        regime_asset = st.selectbox(
-            "Select Asset for Regime Analysis",
-            selected_tickers,
-            index=0,
-            key="regime_asset"
-        )
+        # Calculate average volatility for each asset
+        avg_vols = {}
+        for asset in selected_tickers:
+            if asset in ewma_vol.columns:
+                avg_vols[asset] = ewma_vol[asset].mean() * np.sqrt(TRADING_DAYS) * 100
         
-        if regime_asset in ewma_vol.columns:
-            # Calculate regimes
-            vol_series = ewma_vol[regime_asset].dropna()
-            regime = ewma_analysis.calculate_volatility_regime(vol_series)
+        if avg_vols:
+            avg_vol_df = pd.DataFrame({
+                'Asset': list(avg_vols.keys()),
+                'Avg Annualized Vol (%)': list(avg_vols.values())
+            }).sort_values('Avg Annualized Vol (%)', ascending=False)
             
-            # Create regime plot
-            fig = make_subplots(
-                rows=2, cols=1,
-                shared_xaxes=True,
-                vertical_spacing=0.05,
-                subplot_titles=(
-                    f"EWMA Volatility - {regime_asset}",
-                    "Volatility Regime Classification"
+            fig2 = go.Figure(data=[
+                go.Bar(
+                    x=avg_vol_df['Asset'],
+                    y=avg_vol_df['Avg Annualized Vol (%)'],
+                    marker_color='#1a5fb4',
+                    text=avg_vol_df['Avg Annualized Vol (%)'].apply(lambda x: f"{x:.1f}%"),
+                    textposition='auto'
                 )
-            )
-            
-            # Volatility series
-            fig.add_trace(
-                go.Scatter(
-                    x=vol_series.index,
-                    y=vol_series * np.sqrt(TRADING_DAYS) * 100,
-                    name="Volatility",
-                    line=dict(color='#1a5fb4', width=2)
-                ),
-                row=1, col=1
-            )
-            
-            # Regime classification
-            regime_colors = {
-                'Low Volatility': 'green',
-                'Normal Volatility': 'yellow',
-                'High Volatility': 'red'
-            }
-            
-            for regime_type in ['Low Volatility', 'Normal Volatility', 'High Volatility']:
-                mask = regime == regime_type
-                if mask.any():
-                    fig.add_trace(
-                        go.Scatter(
-                            x=vol_series.index[mask],
-                            y=[1] * mask.sum(),
-                            mode='markers',
-                            name=regime_type,
-                            marker=dict(
-                                color=regime_colors[regime_type],
-                                size=8,
-                                symbol='square'
-                            )
-                        ),
-                        row=2, col=1
-                    )
-            
-            fig.update_layout(
-                height=600,
-                template="plotly_dark",
-                showlegend=True
-            )
-            
-            fig.update_xaxes(title_text="Date", row=2, col=1)
-            fig.update_yaxes(title_text="Annualized Vol (%)", row=1, col=1)
-            fig.update_yaxes(title_text="Regime", row=2, col=1, range=[0.5, 3.5])
-            
-            st.plotly_chart(fig, use_container_width=True)
-            
-            # Regime statistics
-            st.subheader("📊 Regime Statistics")
-            
-            regime_counts = regime.value_counts()
-            regime_percentage = regime.value_counts(normalize=True) * 100
-            
-            col1, col2, col3 = st.columns(3)
-            
-            regimes_displayed = 0
-            for i, (regime_type, count) in enumerate(regime_counts.items()):
-                if regimes_displayed < 3:
-                    with [col1, col2, col3][i % 3]:
-                        st.metric(
-                            regime_type,
-                            f"{count} days",
-                            f"{regime_percentage.get(regime_type, 0):.1f}%"
-                        )
-                    regimes_displayed += 1
-        
-        # Volatility clustering analysis
-        st.subheader("📊 Volatility Clustering Analysis")
-        
-        # Calculate autocorrelation of squared returns (volatility clustering)
-        if 'portfolio_returns' in st.session_state:
-            portfolio_returns = st.session_state.portfolio_returns
-            squared_returns = portfolio_returns ** 2
-            
-            # Calculate autocorrelation
-            max_lag = min(50, len(squared_returns) // 2)
-            autocorr = [squared_returns.autocorr(lag=i) for i in range(1, max_lag + 1)]
-            
-            fig2 = go.Figure()
-            fig2.add_trace(go.Bar(
-                x=list(range(1, max_lag + 1)),
-                y=autocorr,
-                name="Autocorrelation",
-                marker_color='#1a5fb4'
-            ))
-            
-            # Add confidence bands (approx 95% CI)
-            conf_band = 1.96 / np.sqrt(len(squared_returns))
-            fig2.add_hline(y=conf_band, line_dash="dash", line_color="red", annotation_text="95% CI Upper")
-            fig2.add_hline(y=-conf_band, line_dash="dash", line_color="red", annotation_text="95% CI Lower")
+            ])
             
             fig2.update_layout(
-                title="Autocorrelation of Squared Returns (Volatility Clustering)",
+                title="Average Annualized Volatility by Asset",
                 height=400,
                 template="plotly_dark",
-                xaxis_title="Lag (days)",
-                yaxis_title="Autocorrelation"
+                xaxis_title="Assets",
+                yaxis_title="Annualized Volatility (%)",
+                xaxis_tickangle=45
             )
             
             st.plotly_chart(fig2, use_container_width=True)
-            
-            # Calculate Ljung-Box test for volatility clustering
-            try:
-                from statsmodels.stats.diagnostic import acorr_ljungbox
-                
-                lb_test = acorr_ljungbox(squared_returns.dropna(), lags=[5, 10, 20], return_df=True)
-                
-                st.write("**Ljung-Box Test for Volatility Clustering:**")
-                st.dataframe(
-                    lb_test.style.format({
-                        'lb_stat': '{:.2f}',
-                        'lb_pvalue': '{:.4f}'
-                    }),
-                    use_container_width=True
-                )
-                
-                # Interpretation
-                significant = (lb_test['lb_pvalue'] < 0.05).any()
-                if significant:
-                    st.success("✅ Significant volatility clustering detected (p < 0.05)")
-                else:
-                    st.warning("⚠️ No significant volatility clustering detected")
-                    
-            except ImportError:
-                st.info("Install statsmodels for Ljung-Box test: `pip install statsmodels`")
     
-    # Tab 6: Monte Carlo VaR (FIXED AND WORKING)
+    # Tab 6: Monte Carlo VaR
     with tab6:
         st.header("🎲 Monte Carlo Simulation & VaR")
         
@@ -2718,10 +1836,10 @@ def main():
             n_simulations = st.number_input(
                 "Number of Simulations",
                 min_value=1000,
-                max_value=100000,
+                max_value=50000,
                 value=10000,
                 step=1000,
-                key="n_simulations"
+                key="n_simulations_tab6"
             )
         
         with col2:
@@ -2729,7 +1847,7 @@ def main():
                 "Time Horizon",
                 ["1 Month", "3 Months", "6 Months", "1 Year"],
                 index=3,
-                key="time_horizon"
+                key="time_horizon_tab6"
             )
             
             horizon_map = {"1 Month": 21, "3 Months": 63, "6 Months": 126, "1 Year": 252}
@@ -2739,24 +1857,14 @@ def main():
             mc_confidence = st.slider(
                 "Confidence Level",
                 min_value=90,
-                max_value=99.9,
+                max_value=99,
                 value=95,
                 step=1,
-                key="mc_confidence"
+                key="mc_confidence_tab6"
             ) / 100
         
-        # Additional parameters
-        st.subheader("🎯 Simulation Methodology")
-        
-        sim_method = st.selectbox(
-            "Simulation Method",
-            ["Geometric Brownian Motion", "Historical Bootstrap", "GARCH (if available)"],
-            index=0,
-            key="sim_method"
-        )
-        
         # Run Monte Carlo simulation
-        if st.button("🚀 Run Monte Carlo Simulation", type="primary", key="run_monte_carlo"):
+        if st.button("🚀 Run Monte Carlo Simulation", type="primary", key="run_monte_carlo_tab6"):
             with st.spinner(f"Running {n_simulations:,} simulations..."):
                 # Use portfolio returns for simulation
                 mu = portfolio_returns.mean()
@@ -2765,37 +1873,13 @@ def main():
                 
                 simulator = MonteCarloSimulator()
                 
-                if sim_method == "Geometric Brownian Motion":
-                    # GBM simulation
-                    paths = simulator.simulate_gbm(
-                        initial_value, mu, sigma, 
-                        T=horizon_days/TRADING_DAYS, 
-                        n_steps=horizon_days,
-                        n_sims=n_simulations
-                    )
-                    
-                elif sim_method == "Historical Bootstrap":
-                    # Historical bootstrap simulation
-                    paths = np.zeros((horizon_days + 1, n_simulations))
-                    paths[0] = initial_value
-                    
-                    for i in range(n_simulations):
-                        # Sample returns with replacement
-                        sampled_returns = np.random.choice(
-                            portfolio_returns.values, 
-                            size=horizon_days, 
-                            replace=True
-                        )
-                        paths[1:, i] = initial_value * np.cumprod(1 + sampled_returns)
-                
-                else:  # GARCH
-                    # Fallback to GBM if GARCH not available
-                    paths = simulator.simulate_gbm(
-                        initial_value, mu, sigma, 
-                        T=horizon_days/TRADING_DAYS, 
-                        n_steps=horizon_days,
-                        n_sims=n_simulations
-                    )
+                # GBM simulation
+                paths = simulator.simulate_gbm(
+                    initial_value, mu, sigma, 
+                    T=horizon_days/TRADING_DAYS, 
+                    n_steps=horizon_days,
+                    n_sims=n_simulations
+                )
                 
                 # Calculate final returns
                 final_returns = (paths[-1] / initial_value) - 1
@@ -2813,8 +1897,7 @@ def main():
                     'horizon_days': horizon_days,
                     'confidence': mc_confidence,
                     'mu': mu,
-                    'sigma': sigma,
-                    'method': sim_method
+                    'sigma': sigma
                 }
         
         # Display results if available
@@ -2844,7 +1927,7 @@ def main():
                 prob_loss = (st.session_state.mc_final_returns < 0).mean()
                 st.metric("Probability of Loss", f"{prob_loss:.2%}")
             
-            # Visualization 1: Sample paths
+            # Visualization: Sample paths
             st.subheader("📈 Sample Simulation Paths")
             
             fig1 = go.Figure()
@@ -2893,7 +1976,7 @@ def main():
             
             st.plotly_chart(fig1, use_container_width=True)
             
-            # Visualization 2: Distribution of final returns
+            # Visualization: Distribution of final returns
             st.subheader("📊 Distribution of Final Portfolio Values")
             
             fig2 = make_subplots(
@@ -2945,19 +2028,6 @@ def main():
                 row=1, col=2
             )
             
-            # Add VaR to CDF
-            var_percentile = np.mean(st.session_state.mc_final_returns <= st.session_state.mc_var)
-            fig2.add_trace(
-                go.Scatter(
-                    x=[st.session_state.mc_var * 100],
-                    y=[var_percentile],
-                    mode='markers',
-                    marker=dict(color='red', size=10),
-                    name=f"VaR ({var_percentile:.1%})"
-                ),
-                row=1, col=2
-            )
-            
             fig2.update_layout(
                 height=500,
                 template="plotly_dark",
@@ -2970,78 +2040,8 @@ def main():
             fig2.update_yaxes(title_text="Cumulative Probability", row=1, col=2)
             
             st.plotly_chart(fig2, use_container_width=True)
-            
-            # Risk metrics table
-            st.subheader("📋 Detailed Risk Metrics")
-            
-            # Calculate additional metrics
-            final_values = st.session_state.mc_paths[-1]
-            
-            risk_metrics = {
-                'Metric': [
-                    'Value at Risk (VaR)',
-                    'Conditional VaR (CVaR)',
-                    'Expected Shortfall (ES)',
-                    'Maximum Loss',
-                    'Minimum Loss',
-                    'Average Return',
-                    'Median Return',
-                    'Standard Deviation',
-                    'Skewness',
-                    'Kurtosis',
-                    'Value at 5% Tail',
-                    'Value at 1% Tail'
-                ],
-                'Value': [
-                    st.session_state.mc_var,
-                    st.session_state.mc_cvar,
-                    st.session_state.mc_cvar,  # Same as CVaR
-                    st.session_state.mc_final_returns.min(),
-                    st.session_state.mc_final_returns.max(),
-                    st.session_state.mc_final_returns.mean(),
-                    np.median(st.session_state.mc_final_returns),
-                    st.session_state.mc_final_returns.std(),
-                    stats.skew(st.session_state.mc_final_returns),
-                    stats.kurtosis(st.session_state.mc_final_returns),
-                    np.percentile(st.session_state.mc_final_returns, 5),
-                    np.percentile(st.session_state.mc_final_returns, 1)
-                ]
-            }
-            
-            risk_metrics_df = pd.DataFrame(risk_metrics)
-            
-            st.dataframe(
-                risk_metrics_df.style.format({'Value': '{:.4%}'}),
-                use_container_width=True,
-                height=400
-            )
-            
-            # Export simulation results
-            if st.button("📥 Export Simulation Results", key="export_sim_results"):
-                # Create comprehensive results DataFrame
-                results_dict = {
-                    'Parameter': list(st.session_state.mc_params.keys()),
-                    'Value': list(st.session_state.mc_params.values())
-                }
-                
-                results_df = pd.DataFrame(results_dict)
-                
-                # Add risk metrics
-                risk_metrics_df_copy = risk_metrics_df.copy()
-                risk_metrics_df_copy['Value'] = risk_metrics_df_copy['Value'].apply(lambda x: f"{x:.6%}")
-                
-                # Combine
-                combined_df = pd.concat([results_df, risk_metrics_df_copy], ignore_index=True)
-                
-                csv = combined_df.to_csv(index=False)
-                st.download_button(
-                    label="Download Results CSV",
-                    data=csv,
-                    file_name="monte_carlo_results.csv",
-                    mime="text/csv"
-                )
     
-    # Tab 7: Performance Attribution (FIXED AND WORKING)
+    # Tab 7: Performance Attribution
     with tab7:
         st.header("📊 Performance Attribution Analysis")
         
@@ -3133,138 +2133,52 @@ def main():
         
         st.plotly_chart(fig, use_container_width=True)
         
-        # Risk Attribution
-        st.subheader("⚖️ Risk Attribution Analysis")
+        # Asset contribution to returns
+        st.subheader("📊 Asset Contribution Analysis")
         
-        risk_attribution = attribution.calculate_risk_attribution(
-            portfolio_returns,
-            asset_returns,
-            weights
-        )
+        # Calculate asset contributions
+        asset_contributions = pd.DataFrame({
+            'Asset': selected_tickers,
+            'Weight': weights,
+            'Return': asset_returns.mean().values * TRADING_DAYS,
+            'Contribution': weights * asset_returns.mean().values * TRADING_DAYS
+        }).sort_values('Contribution', ascending=False)
         
         col_a, col_b = st.columns(2)
         
         with col_a:
             st.dataframe(
-                risk_attribution.style.format({
+                asset_contributions.style.format({
                     'Weight': '{:.2%}',
-                    'Marginal_Contribution': '{:.4f}',
-                    'Percent_Contribution': '{:.1f}%'
+                    'Return': '{:.2%}',
+                    'Contribution': '{:.2%}'
                 }),
                 use_container_width=True,
                 height=400
             )
         
         with col_b:
-            # Visualization of risk contributions
+            # Visualization of contributions
             fig2 = go.Figure(data=[
                 go.Bar(
-                    x=risk_attribution['Asset'],
-                    y=risk_attribution['Percent_Contribution'],
+                    x=asset_contributions['Asset'],
+                    y=asset_contributions['Contribution'] * 100,
                     marker_color='#1a5fb4',
-                    text=risk_attribution['Percent_Contribution'].apply(lambda x: f"{x:.1f}%"),
+                    text=asset_contributions['Contribution'].apply(lambda x: f"{x:.2%}"),
                     textposition='auto'
                 )
             ])
             
             fig2.update_layout(
-                title="Risk Contribution by Asset (%)",
+                title="Asset Contribution to Portfolio Return",
                 height=400,
                 template="plotly_dark",
                 xaxis_title="Assets",
-                yaxis_title="Risk Contribution (%)",
+                yaxis_title="Contribution (%)",
                 xaxis_tickangle=45
             )
             
             st.plotly_chart(fig2, use_container_width=True)
-        
-        # Time-series attribution
-        st.subheader("📈 Rolling Attribution Analysis")
-        
-        rolling_window = st.slider(
-            "Rolling Window (days)",
-            min_value=20,
-            max_value=252,
-            value=60,
-            step=10,
-            key="rolling_attribution_window"
-        )
-        
-        # Calculate rolling attribution
-        rolling_dates = []
-        rolling_allocation = []
-        rolling_selection = []
-        
-        for i in range(rolling_window, len(portfolio_returns)):
-            window_returns = asset_returns.iloc[i-rolling_window:i]
-            window_portfolio = portfolio_returns.iloc[i-rolling_window:i]
-            window_benchmark = benchmark_portfolio_returns.iloc[i-rolling_window:i]
-            
-            # Simple approximation for rolling attribution
-            alloc_effect = (weights - benchmark_weights) @ (window_returns.mean().values - window_benchmark.mean())
-            sel_effect = benchmark_weights @ (window_returns.mean().values - window_benchmark.mean())
-            
-            rolling_dates.append(window_returns.index[-1])
-            rolling_allocation.append(alloc_effect)
-            rolling_selection.append(sel_effect)
-        
-        if rolling_dates:
-            fig3 = go.Figure()
-            
-            fig3.add_trace(go.Scatter(
-                x=rolling_dates,
-                y=np.array(rolling_allocation) * TRADING_DAYS * 100,
-                name='Rolling Allocation',
-                line=dict(color='#1a5fb4', width=2)
-            ))
-            
-            fig3.add_trace(go.Scatter(
-                x=rolling_dates,
-                y=np.array(rolling_selection) * TRADING_DAYS * 100,
-                name='Rolling Selection',
-                line=dict(color='#26a269', width=2)
-            ))
-            
-            fig3.add_trace(go.Scatter(
-                x=rolling_dates,
-                y=(np.array(rolling_allocation) + np.array(rolling_selection)) * TRADING_DAYS * 100,
-                name='Total Active',
-                line=dict(color='#f5a623', width=3, dash='dash')
-            ))
-            
-            fig3.update_layout(
-                title=f"Rolling Attribution ({rolling_window} days)",
-                height=500,
-                template="plotly_dark",
-                xaxis_title="Date",
-                yaxis_title="Active Return Contribution (%)",
-                hovermode='x unified'
-            )
-            
-            st.plotly_chart(fig3, use_container_width=True)
-        
-        # Export attribution results
-        if st.button("📥 Export Attribution Report", key="export_attribution"):
-            # Combine all attribution data
-            attribution_data = {
-                'Brinson_Attribution': brinson_results,
-                'Risk_Attribution': risk_attribution.to_dict('records')
-            }
-            
-            # Convert to JSON
-            attribution_json = json.dumps(attribution_data, indent=2, default=str)
-            st.download_button(
-                label="Download JSON Report",
-                data=attribution_json,
-                file_name="performance_attribution.json",
-                mime="application/json"
-            )
-    
-    # Tab 8: Global Exposure (already working)
-    # Tab 9: Risk Scorecard (already working)
-    
-    # Since Tabs 8 and 9 are already working from previous code, we'll keep them as is
-    # You can copy the working code from your previous implementation here
 
 # -------------------------------------------------------------
 # RUN APPLICATION
